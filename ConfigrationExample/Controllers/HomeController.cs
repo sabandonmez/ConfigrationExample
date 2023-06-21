@@ -22,6 +22,10 @@ namespace ConfigrationExample.Controllers
             var v1 = _configuration["Ornek"];
             var v2 = _configuration["Person:Name"];
 
+            var v7 = _configuration.GetSection("Person:Name");
+
+            var v8 = _configuration.GetSection("Person").Get(typeof(Person));
+
             return View();
         }
 
