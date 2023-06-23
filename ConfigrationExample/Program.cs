@@ -1,9 +1,14 @@
 
+using ConfigrationExample.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
 builder.Configuration.AddJsonFile("hilmi.json");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 
 var app = builder.Build();
 

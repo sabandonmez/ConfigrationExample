@@ -14,17 +14,21 @@ namespace ConfigrationExample.Controllers
         }
         public IActionResult Index()
         {
+            MailInfo mailInfo = _configuration.GetSection("MailInfo").Get<MailInfo>();
+
             return View();
         }
 
         public IActionResult Privacy()
         {
+            #region x
             var v1 = _configuration["Ornek"];
             var v2 = _configuration["Person:Name"];
 
             var v7 = _configuration.GetSection("Person:Name");
 
             var v8 = _configuration.GetSection("Person").Get(typeof(Person));
+            #endregion
 
             return View();
         }
