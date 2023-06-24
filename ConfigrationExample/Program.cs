@@ -9,6 +9,17 @@ builder.Configuration.AddJsonFile("hilmi.json");
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+#region Configration 
+//var builder = WebApplication.CreateBuilder(args);
+
+//// Add services to the container.
+//...
+//ConfigurationManager configuration = builder.Configuration; // allows both to access and to set up the config
+//IWebHostEnvironment environment = builder.Environment;
+#endregion
+
+ConfigurationManager configuration = builder.Configuration;
+builder.Services.Configure<MailInfo>(configuration.GetSection("MailInfo"));
 
 var app = builder.Build();
 

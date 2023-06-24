@@ -1,33 +1,28 @@
 ﻿using ConfigrationExample.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Diagnostics;
 
 namespace ConfigrationExample.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IConfiguration _configuration;
+        MailInfo _mailInfo;
 
-        public HomeController(IConfiguration configuration)
+        public HomeController(IOptions<MailInfo> mailInfo)
         {
-            this._configuration = configuration;
+            this._mailInfo = mailInfo.Value;
         }
         public IActionResult Index()
         {
-            MailInfo mailInfo = _configuration.GetSection("MailInfo").Get<MailInfo>();
-
+            Console.WriteLine(_mailInfo.EmailInfo.Email);
             return View();
         }
 
         public IActionResult Privacy()
         {
             #region x
-            var v1 = _configuration["Ornek"];
-            var v2 = _configuration["Person:Name"];
-
-            var v7 = _configuration.GetSection("Person:Name");
-
-            var v8 = _configuration.GetSection("Person").Get(typeof(Person));
+            
             #endregion
 
             return View();
