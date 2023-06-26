@@ -7,23 +7,21 @@ namespace ConfigrationExample.Controllers
 {
     public class HomeController : Controller
     {
-        MailInfo _mailInfo;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(IOptions<MailInfo> mailInfo)
+        public HomeController(IConfiguration configuration )
         {
-            this._mailInfo = mailInfo.Value;
+            this._configuration = configuration;
         }
         public IActionResult Index()
         {
-            Console.WriteLine(_mailInfo.EmailInfo.Email);
+            var kullanici = _configuration["MailBilgileri:Kullanici"];
+            var sifre = _configuration["MailBilgileri:Sifre"];
             return View();
         }
 
         public IActionResult Privacy()
         {
-            #region x
-            
-            #endregion
 
             return View();
         }
