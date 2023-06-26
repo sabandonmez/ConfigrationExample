@@ -1,6 +1,7 @@
 ﻿using ConfigrationExample.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.Data.SqlClient;
 using System.Diagnostics;
 
 namespace ConfigrationExample.Controllers
@@ -15,9 +16,15 @@ namespace ConfigrationExample.Controllers
         }
         public IActionResult Index()
         {
-            var kullanici = _configuration["MailBilgileri:Kullanici"];
-            var sifre = _configuration["MailBilgileri:Sifre"];
-            return View();
+
+            var connection = _configuration.GetConnectionString("SQL");
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connection);
+            builder.UserID = _configuration["SQL:KullaniciAdi"]; 
+            builder.Password = _configuration["SQL:Sifre"];
+
+            var x = builder.ConnectionString;
+
+            return View(); 
         }
 
         public IActionResult Privacy()
